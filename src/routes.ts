@@ -44,7 +44,7 @@ router.post("/monitor/trigger", async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      status: result.changed,
+      changed: result.changed,
       message: result.message,
     });
   } catch (error: any) {

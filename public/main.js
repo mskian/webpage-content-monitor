@@ -4,11 +4,30 @@ const actionDropdown = document.getElementById("actionDropdown");
 
 const API_BASE = "/api/monitor";
 
+function showDefaultMessage() {
+  resultContainer.innerHTML = `
+    <pre class="has-text-danger mt-5">Please select an action to proceed.</pre>
+  `;
+  resultContainer.classList.remove("is-hidden");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedAction = localStorage.getItem("selectedAction");
+  if (savedAction) {
+    actionDropdown.value = savedAction;
+    actionDropdown.dispatchEvent(new Event("change"));
+  } else {
+    showDefaultMessage();
+  }
+});
+
 actionDropdown.addEventListener("change", () => {
   const action = actionDropdown.value;
+
+  localStorage.setItem("selectedAction", action);
+
   formContainer.innerHTML = "";
   resultContainer.innerHTML = "";
-
   resultContainer.classList.add("is-hidden");
 
   if (action === "add") {
@@ -39,17 +58,7 @@ formContainer.addEventListener("submit", async (e) => {
 
   if (e.target.id === "addForm") {
     const url = document.getElementById("urlInput").value.trim();
-    
-    if (!url) {
-      displayNotification("URL cannot be empty.", "danger");
-      return;
-    }
-
-    const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?$/;
-    if (!urlPattern.test(url)) {
-      displayNotification("Invalid URL format. Please enter a valid URL.", "danger");
-      return;
-    }
+    if (!validateURL(url)) return;
 
     try {
       const response = await fetch(API_BASE, {
@@ -57,7 +66,6 @@ formContainer.addEventListener("submit", async (e) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
-
       const result = await response.json();
       displayResult(result);
     } catch (error) {
@@ -67,17 +75,7 @@ formContainer.addEventListener("submit", async (e) => {
 
   if (e.target.id === "triggerForm") {
     const url = document.getElementById("triggerInput").value.trim();
-    
-    if (!url) {
-      displayNotification("URL cannot be empty.", "danger");
-      return;
-    }
-
-    const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?$/;
-    if (!urlPattern.test(url)) {
-      displayNotification("Invalid URL format. Please enter a valid URL.", "danger");
-      return;
-    }
+    if (!validateURL(url)) return;
 
     try {
       const response = await fetch(`${API_BASE}/trigger`, {
@@ -85,7 +83,6 @@ formContainer.addEventListener("submit", async (e) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
-
       const result = await response.json();
       displayResult(result);
     } catch (error) {
@@ -94,12 +91,33 @@ formContainer.addEventListener("submit", async (e) => {
   }
 });
 
+function validateURL(url) {
+  if (!url) {
+    displayNotification("URL cannot be empty.", "danger");
+    return false;
+  }
+
+  const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?$/;
+  if (!urlPattern.test(url)) {
+    displayNotification("Invalid URL format. Please enter a valid URL.", "danger");
+    return false;
+  }
+  return true;
+}
+
 async function fetchMonitoredURLs() {
   try {
     const response = await fetch(API_BASE);
     const result = await response.json();
-    displayResult(result.data);
+
+    if (result.success && Array.isArray(result.data)) {
+      const urls = result.data.map((item) => item.url);
+      displayResult(urls);
+    } else {
+      displayNotification("No monitored URLs found.", "info");
+    }
   } catch (error) {
+    console.error("Error fetching monitored URLs:", error);
     displayNotification("Failed to fetch monitored URLs.", "danger");
   }
 }

@@ -28,7 +28,7 @@ class URLMonitor {
    * @param url string
    * @returns Result of the check
    */
-  async triggerCheck(url: string): Promise<{ message: string; changed: boolean; data: MonitoredURL }> {
+  async triggerCheck(url: string): Promise<{ message: string; changed: string; data: MonitoredURL }> {
     const urlData = this.monitoredURLs.find((u) => u.url === url);
     if (!urlData) {
       throw new Error(`URL "${url}" is not being monitored.`);
@@ -45,7 +45,7 @@ class URLMonitor {
         urlData.lastChecked = new Date().toISOString();
 
         writeFile(this.monitoredURLs);
-        return { message: "Change detected in content.", changed: true, data: urlData };
+        return { message: "Change detected in content.", changed: "yes", data: urlData };
       }
 
       // No changes
@@ -53,7 +53,7 @@ class URLMonitor {
       urlData.lastChecked = new Date().toISOString();
       writeFile(this.monitoredURLs);
 
-      return { message: "No changes detected.", changed: false, data: urlData };
+      return { message: "No changes detected.", changed: "no", data: urlData };
     } catch (err: any) {
       throw new Error(`Failed to check URL "${url}": ${err.message}`);
     }
