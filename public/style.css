@@ -1,0 +1,62 @@
+html, body {
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	font-family: "Ubuntu Mono", serif;
+}
+body {
+	background-color: #0c1a1b;
+	color: #121212;
+	padding-bottom: 20px;
+  
+}
+  .title {
+    font-family: "Ubuntu Mono", serif;
+    text-align: center;
+  }
+  select {
+    font-family: "Ubuntu Mono", serif;
+  }
+  option {
+    font-family: "Ubuntu Mono", serif;
+  }
+  .box {
+    border: 2px solid #00ff00;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #1a1a1a;
+    font-family: "Ubuntu Mono", serif;
+  }
+  .input, .button {
+    font-family: "Ubuntu Mono", serif;
+    background-color: #121212;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+  }
+  .input:focus, .button:focus {
+    background-color: #333333;
+    border-color: #00ff00;
+  }
+  .button {
+    font-family: "Ubuntu Mono", serif;
+    margin-top: 10px;
+  }
+  .notification {
+    background-color: #1a1a1a;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    font-family: "Ubuntu Mono", serif;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    padding: 10px;
+  }
+  pre {
+	background-color: #1e0922;
+	font-family: "Ubuntu Mono", serif;
+	color: #7bed9f;
+	padding: 15px;
+	border-radius: 5px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+}

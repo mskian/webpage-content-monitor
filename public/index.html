@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webpage Content Monitor: Track Changes Instantly</title>
+    <meta property="og:description" content="A simple and efficient tool to monitor any webpage and receive instant alerts when content changes.">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css" integrity="sha512-RpeJZX3aH5oZN3U3JhE7Sd+HG8XQsqmP3clIbu4G28p668yNsRNj3zMASKe1ATjl/W80wuEtCx2dFA8xaebG5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+        <div class="column is-three-fifths">
+        <h1 class="title has-text-success is-5 mt-4 mb-6">📡 Webpage Content Monitor</h1>
+        <div class="field">
+          <label class="label has-text-danger">Select an Action:</label>
+          <div class="control">
+            <div class="select is-dark">
+              <select id="actionDropdown">
+                <option value="default" disabled selected>Select Action</option>
+                <option value="add">Add URL</option>
+                <option value="get">View Monitored URLs</option>
+                <option value="trigger">Trigger URL Check</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="formContainer" class="is-hidden mt-6">
+        </div>
+        <div id="resultContainer" class="is-hidden">
+        </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <script src="/main.js"></script>
+</body>
+</html>
