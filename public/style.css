@@ -3,60 +3,121 @@ html, body {
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
-	font-family: "Ubuntu Mono", serif;
+	font-family: "Geist Mono", serif;
+  word-wrap: break-word;
 }
 body {
-	background-color: #0c1a1b;
+	background-color:rgb(240, 221, 160);
 	color: #121212;
 	padding-bottom: 20px;
-  
 }
-  .title {
-    font-family: "Ubuntu Mono", serif;
+.title {
+  font-family: "Geist Mono", serif;
     text-align: center;
   }
   select {
-    font-family: "Ubuntu Mono", serif;
+    font-family: "Geist Mono", serif;
   }
   option {
-    font-family: "Ubuntu Mono", serif;
+    font-family: "Geist Mono", serif;
   }
-  .box {
-    border: 2px solid #00ff00;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #1a1a1a;
-    font-family: "Ubuntu Mono", serif;
-  }
-  .input, .button {
-    font-family: "Ubuntu Mono", serif;
-    background-color: #121212;
-    color: #00ff00;
-    border: 1px solid #00ff00;
-  }
-  .input:focus, .button:focus {
-    background-color: #333333;
-    border-color: #00ff00;
+  .input {
+    font-family: "Geist Mono", serif;
+    
   }
   .button {
-    font-family: "Ubuntu Mono", serif;
+    font-family: "Geist Mono", serif;
     margin-top: 10px;
-  }
-  .notification {
-    background-color: #1a1a1a;
-    color: #00ff00;
-    border: 2px solid #00ff00;
-    font-family: "Ubuntu Mono", serif;
-    font-size: 1.1rem;
-    margin-top: 20px;
-    padding: 10px;
   }
   pre {
 	background-color: #1e0922;
-	font-family: "Ubuntu Mono", serif;
+	font-family: "Geist Mono", serif;
 	color: #7bed9f;
 	padding: 15px;
 	border-radius: 5px;
 	overflow-x: auto;
 	white-space: pre-wrap;
+  word-wrap: break-word;
+}
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-bottom: 20px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f44336;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: transform 0.3s ease;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+body.dark-mode {
+	background-color:#442241;
+	color: #121212;
+	padding-bottom: 20px;
+}
+.dark-mode pre {
+  background-color: #291010;
+  color: #7bed9f;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.text-all {
+  font-family: "Geist Mono", serif;
+	color: #222523;
+}
+.dark-mode .text-all {
+  font-family: "Geist Mono", serif;
+	color: #f1d75f;
+}
+input::-webkit-input-placeholder {
+  color: #1f0505;
+}
+
+input:-moz-placeholder {
+  color: #1f0505;
+}
+
+input::-moz-placeholder {
+  color: #1f0505;
+}
+
+input:-ms-input-placeholder {
+  color: #1f0505;
+}
+.notification {
+  font-family: "Geist Mono", serif;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  padding: 10px;
 }

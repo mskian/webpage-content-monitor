@@ -33,9 +33,9 @@ actionDropdown.addEventListener("change", () => {
   if (action === "add") {
     formContainer.innerHTML = `
       <form id="addForm">
-        <label class="label">URL to Monitor:</label>
-        <input class="input is-dark" type="text" id="urlInput" placeholder="Enter URL" required>
-        <button class="button is-success mt-2" type="submit">Add URL</button>
+        <label class="label text-all">URL to Monitor:</label>
+        <input class="input is-success" type="text" id="urlInput" placeholder="Enter URL" required>
+        <button class="button is-info mt-2" type="submit">Add URL</button>
       </form>
     `;
     formContainer.classList.remove("is-hidden");
@@ -44,8 +44,8 @@ actionDropdown.addEventListener("change", () => {
   } else if (action === "trigger") {
     formContainer.innerHTML = `
       <form id="triggerForm">
-        <label class="label">URL to Trigger Check:</label>
-        <input class="input is-dark" type="text" id="triggerInput" placeholder="Enter URL" required>
+        <label class="label text-all">URL to Trigger Check:</label>
+        <input class="input is-success" type="text" id="triggerInput" placeholder="Enter URL" required>
         <button class="button is-warning mt-2" type="submit">Trigger Check</button>
       </form>
     `;
@@ -123,8 +123,26 @@ async function fetchMonitoredURLs() {
 }
 
 function displayResult(result) {
-  resultContainer.innerHTML = `<div class="mt-6"><pre>${JSON.stringify(result, null, 2)}</pre></div>`;
+  const CurrrentTime = getCurrentDateTime();
+  resultContainer.innerHTML = `<div class="mt-6"><P class="text-all">Logged at: ${CurrrentTime}</P><br><pre>${JSON.stringify(result, null, 2)}</pre></div>`;
   resultContainer.classList.remove("is-hidden");
+}
+
+function getCurrentDateTime() {
+  const options = {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+  };
+
+  const now = new Date();
+  const date = now.toLocaleDateString("en-US", options);
+
+  return `${date}`;
 }
 
 function displayNotification(message, type = "info") {

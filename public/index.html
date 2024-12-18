@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css" integrity="sha512-RpeJZX3aH5oZN3U3JhE7Sd+HG8XQsqmP3clIbu4G28p668yNsRNj3zMASKe1ATjl/W80wuEtCx2dFA8xaebG5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -21,11 +21,18 @@
       <div class="container">
         <div class="columns is-centered">
         <div class="column is-three-fifths">
-        <h1 class="title has-text-success is-5 mt-4 mb-6">📡 Webpage Content Monitor</h1>
+        <h1 class="title text-all is-5 mt-4 mb-6">📡 Webpage Content Monitor</h1>
+        <p class="text-all mb-2"><b>Change Theme:</b></p>
+        <div class="toggle-container">
+          <label class="switch">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="slider"></span>
+          </label>
+      </div>
         <div class="field">
-          <label class="label has-text-danger">Select an Action:</label>
+          <label class="label text-all">Select an Action:</label>
           <div class="control">
-            <div class="select is-dark">
+            <div class="select is-warning">
               <select id="actionDropdown">
                 <option value="default" disabled selected>Select Action</option>
                 <option value="add">Add URL</option>
@@ -43,6 +50,50 @@
         </div>
       </div>
     </section>
-    <script src="/main.js"></script>
+<script>
+      const canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', window.location.href);
+
+    document.head.appendChild(canonicalLink);
+      const toggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+
+      function applyTheme(theme) {
+          if (theme === 'dark') {
+              body.classList.add('dark-mode');
+              toggle.checked = true;
+          } else {
+              body.classList.remove('dark-mode');
+              toggle.checked = false;
+          }
+      }
+
+      function initTheme() {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme) {
+              applyTheme(savedTheme);
+          } else {
+              const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              applyTheme(prefersDark ? 'dark' : 'light');
+          }
+      }
+
+      toggle.addEventListener('change', () => {
+          const newTheme = toggle.checked ? 'dark' : 'light';
+          applyTheme(newTheme);
+          localStorage.setItem('theme', newTheme);
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          const newSystemTheme = e.matches ? 'dark' : 'light';
+          const savedTheme = localStorage.getItem('theme');
+          if (!savedTheme) {
+              applyTheme(newSystemTheme);
+          }
+      });
+      initTheme();
+</script>
+<script src="/main.js"></script>
 </body>
 </html>
