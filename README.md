@@ -35,8 +35,8 @@ pnpm start
 
 ## Routes
 
-- `/` - Static Home Page
-- `/api` - API
+- `/` - Static Home Page for add, trigger and get all urls from database
+- `/api/monitor` - API for all operations  
 
 ## Database
 
@@ -46,6 +46,14 @@ pnpm start
 mkdir -p data
 touch monitored_urls.json
 ```
+
+- Add Square brackets to the JSON File
+
+```json
+[]
+```
+
+- Done
 
 ## API Usage
 
