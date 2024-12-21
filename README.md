@@ -1,6 +1,6 @@
 # 📡 Webpage Content Monitor: Track Changes Instantly  
 
-![build-test](https://github.com/mskian/url-monitor/workflows/build-test/badge.svg)  
+![build-test](https://github.com/mskian/webpage-content-monitor/workflows/build-test/badge.svg)  
 
 A simple and efficient tool to monitor any webpage and receive instant alerts when content changes.  
 
