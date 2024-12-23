@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import path from 'path';
 import router from "./routes";
 import errorHandler from './utils/errorHandler';
+import { setSecureHeaders } from "./utils/secureHeaders";
 
 const app: Application = express();
 const PORT = process.env.PORT || 6026;
@@ -10,6 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(setSecureHeaders);
+app.disable("x-powered-by");
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
